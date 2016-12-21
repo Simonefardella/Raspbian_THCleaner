@@ -33,7 +33,7 @@ Exec=bash -c 'rdesktop <ip_address> -u <username> -d <domain> -p <password> -k i
 Type=Application
 Encoding=UTF-8
 Terminal=false
-Categories=None;" > /home/pi/Desktop/yourname.desktop
+Categories=None;" > /home/pi/Desktop/rdp.desktop
 
 echo "Fine Tuning RPI Video and Gpu"
 echo "arm_freq=1000" >> /boot/config.txt
