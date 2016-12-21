@@ -21,8 +21,23 @@ rm /usr/share/raspi-ui-overrides/applications/wolfram-mathematica.desktop
 rm /usr/share/applications/sense_emu_gui.desktop
 
 
-echo "Installing Remmina"
-apt-get install -y remmina remmina-plugin-rdp
+echo "Remote Desktop Client: RDesktop"
+apt-get install -y rdesktop
+
+echo "Creating Default Connection Desktop Entry"
+echo "[Desktop Entry]
+Name=Server
+Comment=Connessione al server
+Icon=/usr/share/pixmaps/gksu-debian.xpm
+Exec=bash -c 'rdesktop <ip_address> -u <username> -d <domain> -p <password> -k it -f'
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=None;" > /home/pi/Desktop/yourname.desktop
+
+echo "Fine Tuning RPI Video and Gpu"
+echo "arm_freq=1000" >> /boot/config.txt
+echo "gpu_mem=256" >> /boot/config.txt
 
 echo "Installing HTOP"
 apt-get install -y htop
@@ -31,11 +46,12 @@ echo "Cleaning unused Packages"
 apt-get autoremove -y
 
 echo "Changing Hostname with current data"
-hostname "RaspberryTC.$(date +'%d.%m.%Y')"
+sed -i -e "s/raspberrypi/RaspberryTC.$(date +'%d.%m.%Y')/g" /etc/hosts
+echo "RaspberryTC.$(date +'%d.%m.%Y')" > /etc/hostname
+/etc/init.d/hostname.sh
 
-echo "Setting IT Keyboard"
-setxkbmap it
-
+echo "Setting IT Keyboard Map"
+sed -i -e 's/XKBLAYOUT="gb"/XKBLAYOUT="it"/g' /etc/default/keyboard
 
 echo "Rebooting System"
 reboot
