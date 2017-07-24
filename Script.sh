@@ -29,7 +29,7 @@ echo "[Desktop Entry]
 Name=Server
 Comment=Connessione al server
 Icon=/usr/share/pixmaps/gksu-debian.xpm
-Exec=bash -c 'rdesktop <ip_address> -u <username> -d <domain> -p <password> -k it -f'
+Exec=bash -c 'rdesktop <ip_address> -u <username> -d <domain> -p <password> -k it -f -z -P -x m'
 Type=Application
 Encoding=UTF-8
 Terminal=false
